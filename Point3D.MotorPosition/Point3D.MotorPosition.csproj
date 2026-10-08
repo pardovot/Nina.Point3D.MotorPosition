@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NINA.Point3d.MotorPosition</RootNamespace>
+    <AssemblyName>Point3D.MotorPosition</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
+    <PackageReference Include="NINA.Plugin" Version="3.0.0.1085-nightly" />
+  </ItemGroup>
+  <!-- 3D viewport, models and resources are shared with the Point3D plugin -->
+  <ItemGroup>
+    <Page Include="..\Point3D\Controls\HelixViewport3D.xaml" Link="Shared\Controls\HelixViewport3D.xaml" />
+    <Compile Include="..\Point3D\Controls\HelixViewport3D.xaml.cs" Link="Shared\Controls\HelixViewport3D.xaml.cs" DependentUpon="HelixViewport3D.xaml" />
+    <Compile Include="..\Point3D\Helpers\Enums.cs" Link="Shared\Helpers\Enums.cs" />
+    <Compile Include="..\Point3D\Models\Model3D.cs" Link="Shared\Models\Model3D.cs" />
+    <None Include="..\Point3D\Resources\*.obj;..\Point3D\Resources\*.png" Link="Resources\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="DeployToNina" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+    <PropertyGroup>
+      <NinaPluginDir>$(LOCALAPPDATA)\NINA\Plugins\3.0.0\$(AssemblyName)</NinaPluginDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <NinaPluginResources Include="$(TargetDir)Resources\*" />
+    </ItemGroup>
+    <Copy SourceFiles="$(TargetPath);$(TargetDir)HelixToolkit.Wpf.dll" DestinationFolder="$(NinaPluginDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(NinaPluginResources)" DestinationFolder="$(NinaPluginDir)\Resources" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
