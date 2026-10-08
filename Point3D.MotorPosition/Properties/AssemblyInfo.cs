@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyMetadata("License", "GPL-3.0")]
 [assembly: AssemblyMetadata("LicenseURL", "https://www.gnu.org/licenses/gpl-3.0.en.html")]
-[assembly: AssemblyMetadata("Repository", "https://github.com/pardovot/Nina.Point3D")]
-[assembly: AssemblyMetadata("Homepage", "https://github.com/pardovot/Nina.Point3D")]
+[assembly: AssemblyMetadata("Repository", "https://github.com/pardovot/Nina.Point3D.MotorPosition")]
+[assembly: AssemblyMetadata("Homepage", "https://github.com/pardovot/Nina.Point3D.MotorPosition")]
 [assembly: AssemblyMetadata("Tags", "Point3D,OnStepX,Telescope,Model,Motor,Safety")]
 [assembly: AssemblyMetadata("ChangelogURL", "")]
 [assembly: AssemblyMetadata("FeaturedImageURL", "")]
