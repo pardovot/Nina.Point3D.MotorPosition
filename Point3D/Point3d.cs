@@ -15,6 +15,7 @@ using Settings = NINA.Point3d.Properties.Settings;
 using NINA.Profile;
 using System.Windows.Media;
 using NINA.Point3d.Util;
+using Model3D = NINA.Point3D.Classes.Model3D;
 
 namespace NINA.Point3d {
 
@@ -103,22 +104,9 @@ namespace NINA.Point3d {
             }
         }
 
-        public static Dictionary<String, Color> ModelColors { get; } = new Dictionary<String, Color> {
-            { "Red", Color.FromArgb(255, 255, 0, 0) },
-            { "Blue", Color.FromArgb(255, 0, 0, 255) },
-            { "Green", Color.FromArgb(255, 0, 255, 0) },
-            { "Black", Color.FromArgb(255, 0, 0, 0) },
-            { "White", Color.FromArgb(255, 255, 255, 255) }
-        };
+        public static Dictionary<String, Color> ModelColors => Model3D.ModelColors;
 
-        public static Dictionary<String, Model3DType> OTAStyles { get; } = new Dictionary<String, Model3DType> {
-            { "Default", Model3DType.Default },
-            { "SCT", Model3DType.SchmidtCassegrain },
-            { "RC", Model3DType.RitcheyChretien },
-            { "RC Truss", Model3DType.RitcheyChretienTruss },
-            { "Reflector", Model3DType.Reflector },
-            { "Refractor", Model3DType.Refractor },
-        };
+        public static Dictionary<String, Model3DType> OTAStyles => Model3D.OTAStyles;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) {

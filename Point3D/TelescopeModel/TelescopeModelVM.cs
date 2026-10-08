@@ -302,24 +302,7 @@ namespace NINA.Point3d.TelescopeModel {
 
                     Logger.Debug($"Color={_modelColor} Style={_otaType}");
 
-                    var import = new ModelImporter();
-                    var model = import.Load(Model3D.GetModelFile(_otaType));
-
-                    var accentbrush = new SolidColorBrush(_modelColor);
-
-                    var materialota = MaterialHelper.CreateMaterial(accentbrush);
-                    if (model.Children[0] is GeometryModel3D ota) ota.Material = materialota;
-
-                    if (model.Children.Count >= 3) {
-                        //color weights
-                        var materialweights = MaterialHelper.CreateMaterial(new SolidColorBrush(Color.FromRgb(64, 64, 64)));
-                        if (model.Children[1] is GeometryModel3D weights) { weights.Material = materialweights; }
-                        //color bar
-                        var materialbar = MaterialHelper.CreateMaterial(Brushes.Gainsboro);
-                        if (model.Children[2] is GeometryModel3D bar) { bar.Material = materialbar; }
-                    }
-
-                    Model = model;
+                    Model = Model3D.LoadTelescope(_otaType, _modelColor);
                     RaisePropertyChanged(nameof(Model));
                 }
                 catch (Exception ex) {
